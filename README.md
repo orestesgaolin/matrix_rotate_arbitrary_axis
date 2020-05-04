@@ -10,7 +10,7 @@ If you want to apply rotation matrix to canvas in Flutter you can just call:
 
 ```dart
 // Build a rotation matrix for rotations about the line through (a, b, c)  parallel to [u, v, w] by the angle theta. 
-final rotationMatrix = RotationMatrix(a, b, c, u, v, w, angleInRadians);
+final rotationMatrix = RotationMatrix(a, b, c, uUn, vUn, wUn, angleInRadians);
 final matrix = rotationMatrix.getMatrix();
 canvas.transform(matrix2);
 ```
