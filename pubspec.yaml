@@ -1,7 +1,7 @@
 name: matrix_rotate_arbitrary_axis
 description: Library to generate rotation matrix around arbitrary axis
 version: 1.0.0
-author: Dominik Roszkowski <dominik@roszkowski.dev>, Glenn Murray
+homepage: https://github.com/orestesgaolin/animated_flutter_logo
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
