@@ -25,3 +25,9 @@ The parameters are:
  - [vUn] y-coordinate of the line's direction vector (unnormalized).
  - [wUn] z-coordinate of the line's direction vector (unnormalized).
  - [theta] The angle of rotation, in radians.
+
+ ## Example
+
+ See example in the `example` folder
+
+![example animation](example/example.gif)
