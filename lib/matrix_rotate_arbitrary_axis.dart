@@ -63,11 +63,11 @@ class RotationMatrix {
     num w = wUn / l;
 
     // Set some intermediate values.
-    num u2 = u * u;
-    num v2 = v * v;
-    num w2 = w * w;
+    var u2 = u * u;
+    var v2 = v * v;
+    var w2 = w * w;
     num cosT = math.cos(theta);
-    num oneMinusCosT = 1 - cosT;
+    var oneMinusCosT = 1 - cosT;
     num sinT = math.sin(theta);
 
     // Build the matrix entries element by element.
@@ -140,7 +140,7 @@ class RotationMatrix {
 
     num l;
     if ((l = _longEnough(u, v, w)) < 0) {
-      print("RotationMatrix direction vector too short");
+      print('RotationMatrix direction vector too short');
       return null; // Don't bother.
     }
     // Normalize the direction vector.
@@ -148,11 +148,11 @@ class RotationMatrix {
     v = v / l;
     w = w / l;
     // Set some intermediate values.
-    num u2 = u * u;
-    num v2 = v * v;
-    num w2 = w * w;
+    var u2 = u * u;
+    var v2 = v * v;
+    var w2 = w * w;
     num cosT = math.cos(theta);
-    num oneMinusCosT = 1 - cosT;
+    var oneMinusCosT = 1 - cosT;
     num sinT = math.sin(theta);
 
     // Use the formula in the paper.
@@ -196,14 +196,12 @@ class RotationMatrix {
   ///
   /// Returns The matrix as [Matrix4].
   Matrix4 getMatrix() {
-    if (matrix == null) {
-      matrix = Matrix4.columns(
-        Vector4(m11, m21, m31, 0),
-        Vector4(m12, m22, m32, 0),
-        Vector4(m13, m23, m33, 0),
-        Vector4(m14, m24, m34, 1),
-      );
-    }
+    matrix ??= Matrix4.columns(
+      Vector4(m11, m21, m31, 0),
+      Vector4(m12, m22, m32, 0),
+      Vector4(m13, m23, m33, 0),
+      Vector4(m14, m24, m34, 1),
+    );
     return matrix;
   }
 }

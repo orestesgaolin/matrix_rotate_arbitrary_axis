@@ -1,3 +1,7 @@
+## [1.0.1] - Style updates [October 2020]
+
+* Fix analysis issues and improve style
+
 ## [1.0.0+1] - Example added [May 2020]
 
 * Added Flutter example app to show basic usage

@@ -18,8 +18,8 @@ void main() {
       final u1 = 1.0;
       final rM = RotationMatrix(a, b, c, u1, v, w, theta);
       final m = rM.getMatrix();
-      for (int i = 0; i < 4; i++) {
-        for (int j = 0; j < 4; j++) {
+      for (var i = 0; i < 4; i++) {
+        for (var j = 0; j < 4; j++) {
           final index = m.index(i, j);
           if (j == i) {
             equals(m.storage[index], 1);
