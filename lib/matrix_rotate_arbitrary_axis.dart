@@ -29,18 +29,18 @@ class RotationMatrix {
   static const TOLERANCE = 1E-9;
   Matrix4 matrix;
 
-  num m11;
-  num m12;
-  num m13;
-  num m14;
-  num m21;
-  num m22;
-  num m23;
-  num m24;
-  num m31;
-  num m32;
-  num m33;
-  num m34;
+  num _m11;
+  num _m12;
+  num _m13;
+  num _m14;
+  num _m21;
+  num _m22;
+  num _m23;
+  num _m24;
+  num _m31;
+  num _m32;
+  num _m33;
+  num _m34;
 
   /// Build a rotation matrix for rotations about the line through (a, b, c)
   /// parallel to [u, v, w] by the angle theta.
@@ -71,22 +71,22 @@ class RotationMatrix {
     num sinT = math.sin(theta);
 
     // Build the matrix entries element by element.
-    m11 = u2 + (v2 + w2) * cosT;
-    m12 = u * v * oneMinusCosT - w * sinT;
-    m13 = u * w * oneMinusCosT + v * sinT;
-    m14 = (a * (v2 + w2) - u * (b * v + c * w)) * oneMinusCosT +
+    _m11 = u2 + (v2 + w2) * cosT;
+    _m12 = u * v * oneMinusCosT - w * sinT;
+    _m13 = u * w * oneMinusCosT + v * sinT;
+    _m14 = (a * (v2 + w2) - u * (b * v + c * w)) * oneMinusCosT +
         (b * w - c * v) * sinT;
 
-    m21 = u * v * oneMinusCosT + w * sinT;
-    m22 = v2 + (u2 + w2) * cosT;
-    m23 = v * w * oneMinusCosT - u * sinT;
-    m24 = (b * (u2 + w2) - v * (a * u + c * w)) * oneMinusCosT +
+    _m21 = u * v * oneMinusCosT + w * sinT;
+    _m22 = v2 + (u2 + w2) * cosT;
+    _m23 = v * w * oneMinusCosT - u * sinT;
+    _m24 = (b * (u2 + w2) - v * (a * u + c * w)) * oneMinusCosT +
         (c * u - a * w) * sinT;
 
-    m31 = u * w * oneMinusCosT - v * sinT;
-    m32 = v * w * oneMinusCosT + u * sinT;
-    m33 = w2 + (u2 + v2) * cosT;
-    m34 = (c * (u2 + v2) - w * (a * u + b * v)) * oneMinusCosT +
+    _m31 = u * w * oneMinusCosT - v * sinT;
+    _m32 = v * w * oneMinusCosT + u * sinT;
+    _m33 = w2 + (u2 + v2) * cosT;
+    _m34 = (c * (u2 + v2) - w * (a * u + b * v)) * oneMinusCosT +
         (a * v - b * u) * sinT;
   }
 
@@ -103,9 +103,9 @@ class RotationMatrix {
   Vector3 timesXYZ(num x, num y, num z) {
     final p = Vector3(0.0, 0.0, 0.0);
 
-    p[0] = m11 * x + m12 * y + m13 * z + m14;
-    p[1] = m21 * x + m22 * y + m23 * z + m24;
-    p[2] = m31 * x + m32 * y + m33 * z + m34;
+    p[0] = _m11 * x + _m12 * y + _m13 * z + _m14;
+    p[1] = _m21 * x + _m22 * y + _m23 * z + _m24;
+    p[2] = _m31 * x + _m32 * y + _m33 * z + _m34;
 
     return p;
   }
@@ -197,10 +197,10 @@ class RotationMatrix {
   /// Returns The matrix as [Matrix4].
   Matrix4 getMatrix() {
     matrix ??= Matrix4.columns(
-      Vector4(m11, m21, m31, 0),
-      Vector4(m12, m22, m32, 0),
-      Vector4(m13, m23, m33, 0),
-      Vector4(m14, m24, m34, 1),
+      Vector4(_m11, _m21, _m31, 0),
+      Vector4(_m12, _m22, _m32, 0),
+      Vector4(_m13, _m23, _m33, 0),
+      Vector4(_m14, _m24, _m34, 1),
     );
     return matrix;
   }

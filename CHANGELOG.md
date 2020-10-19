@@ -1,3 +1,7 @@
+## [1.0.1+2] - Cleanup [October 2020]
+
+* Make some properties private
+
 ## [1.0.1+1] - Dependency update [October 2020]
 
 * Remove flutter_test dependency
