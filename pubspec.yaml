@@ -1,6 +1,6 @@
 name: matrix_rotate_arbitrary_axis
 description: Simple library to generate rotation matrix around arbitrary axis
-version: 1.0.1
+version: 1.0.1+1
 homepage: https://github.com/orestesgaolin/matrix_rotate_arbitrary_axis
 
 environment:
@@ -11,5 +11,4 @@ dependencies:
 
 dev_dependencies:
   pedantic: ^1.9.2
-  flutter_test:
-    sdk: flutter
+  test: ^1.15.4

@@ -1,7 +1,7 @@
 // import 'dart:math' as math;
-import 'package:flutter_test/flutter_test.dart';
 
 import 'package:matrix_rotate_arbitrary_axis/matrix_rotate_arbitrary_axis.dart';
+import 'package:test/test.dart';
 
 void main() {
   group('constructor', () {

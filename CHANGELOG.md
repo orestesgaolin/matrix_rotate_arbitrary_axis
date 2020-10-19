@@ -1,3 +1,7 @@
+## [1.0.1+1] - Dependency update [October 2020]
+
+* Remove flutter_test dependency
+
 ## [1.0.1] - Style updates [October 2020]
 
 * Fix analysis issues and improve style
