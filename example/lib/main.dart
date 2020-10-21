@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({Key key, @required this.title}) : super(key: key);
 
   final String title;
 
@@ -29,13 +29,17 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
+class _MyHomePageState extends State<MyHomePage>
+    with SingleTickerProviderStateMixin<MyHomePage> {
   AnimationController animationController;
 
   @override
   void initState() {
     super.initState();
-    animationController = AnimationController(duration: Duration(seconds: 4));
+    animationController = AnimationController(
+      vsync: this,
+      duration: Duration(seconds: 4),
+    );
     animationController.forward();
     animationController.repeat(reverse: true);
   }
@@ -62,8 +66,8 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                 final angleTween = Tween<double>(begin: 0.0, end: 3.14)
                     .animate(animationController);
                 return Transform(
-                  transform: RotationMatrix(0, 0, 0, 1, 1, 1, angleTween.value)
-                      .getMatrix(),
+                  transform:
+                      RotationMatrix(0, 0, 0, 1, 1, 1, angleTween.value).matrix,
                   child: Container(
                     color: Colors.blue,
                     width: 300,

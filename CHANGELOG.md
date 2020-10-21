@@ -1,3 +1,9 @@
+## [1.1.0-nullsafety.1] - Null-safety [October 2020]
+
+* **Enable null-safety**
+* Change `getMatrix()` method to getter `matrix`
+* Changed types from `num` to `double`
+
 ## [1.0.1+2] - Cleanup [October 2020]
 
 * Make some properties private

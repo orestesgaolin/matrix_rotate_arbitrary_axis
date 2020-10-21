@@ -27,20 +27,29 @@ import 'package:vector_math/vector_math_64.dart';
 /// available online on https://sites.google.com/site/glennmurray/Home/rotation-matrices-and-formulas
 class RotationMatrix {
   static const TOLERANCE = 1E-9;
-  Matrix4 matrix;
 
-  num _m11;
-  num _m12;
-  num _m13;
-  num _m14;
-  num _m21;
-  num _m22;
-  num _m23;
-  num _m24;
-  num _m31;
-  num _m32;
-  num _m33;
-  num _m34;
+  /// Get the resulting matrix.
+  ///
+  /// Returns The matrix as [Matrix4].
+  Matrix4 get matrix => Matrix4.columns(
+        Vector4(_m11, _m21, _m31, 0),
+        Vector4(_m12, _m22, _m32, 0),
+        Vector4(_m13, _m23, _m33, 0),
+        Vector4(_m14, _m24, _m34, 1),
+      );
+
+  late double _m11;
+  late double _m12;
+  late double _m13;
+  late double _m14;
+  late double _m21;
+  late double _m22;
+  late double _m23;
+  late double _m24;
+  late double _m31;
+  late double _m32;
+  late double _m33;
+  late double _m34;
 
   /// Build a rotation matrix for rotations about the line through (a, b, c)
   /// parallel to [u, v, w] by the angle theta.
@@ -52,23 +61,23 @@ class RotationMatrix {
   /// [vUn] y-coordinate of the line's direction vector (unnormalized).
   /// [wUn] z-coordinate of the line's direction vector (unnormalized).
   /// [theta] The angle of rotation, in radians.
-  RotationMatrix(num a, num b, num c, num uUn, num vUn, num wUn, num theta) {
-    num l;
-    assert((l = _longEnough(uUn, vUn, wUn)) > 0,
-        'RotationMatrix: direction vector too short!');
+  RotationMatrix(double a, double b, double c, double uUn, double vUn,
+      double wUn, double theta) {
+    final l = _longEnough(uUn, vUn, wUn);
+    assert(l > 0, 'RotationMatrix: direction vector too short!');
 
     // In this instance we normalize the direction vector.
-    num u = uUn / l;
-    num v = vUn / l;
-    num w = wUn / l;
+    final u = uUn / l;
+    final v = vUn / l;
+    final w = wUn / l;
 
     // Set some intermediate values.
-    var u2 = u * u;
-    var v2 = v * v;
-    var w2 = w * w;
-    num cosT = math.cos(theta);
-    var oneMinusCosT = 1 - cosT;
-    num sinT = math.sin(theta);
+    final u2 = u * u;
+    final v2 = v * v;
+    final w2 = w * w;
+    final cosT = math.cos(theta);
+    final oneMinusCosT = 1 - cosT;
+    final sinT = math.sin(theta);
 
     // Build the matrix entries element by element.
     _m11 = u2 + (v2 + w2) * cosT;
@@ -100,7 +109,7 @@ class RotationMatrix {
   ///
   /// Returns the product, in a [Vector3], representing the
   /// rotated point.
-  Vector3 timesXYZ(num x, num y, num z) {
+  Vector3 timesXYZ(double x, double y, double z) {
     final p = Vector3(0.0, 0.0, 0.0);
 
     p[0] = _m11 * x + _m12 * y + _m13 * z + _m14;
@@ -134,26 +143,25 @@ class RotationMatrix {
   ///
   /// Returns the product, in a [Vector3], representing the
   /// rotated point.
-  static Vector3 rotPointFromFormula(num a, num b, num c, num u, num v, num w,
-      num x, num y, num z, num theta) {
+  static Vector3 rotPointFromFormula(double a, double b, double c, double u,
+      double v, double w, double x, double y, double z, double theta) {
     // We normalize the direction vector.
 
-    num l;
-    if ((l = _longEnough(u, v, w)) < 0) {
-      print('RotationMatrix direction vector too short');
-      return null; // Don't bother.
+    final l = _longEnough(u, v, w);
+    if (l < 0) {
+      throw (Exception('RotationMatrix direction vector too short'));
     }
     // Normalize the direction vector.
     u = u / l; // Note that is not "this.u".
     v = v / l;
     w = w / l;
     // Set some intermediate values.
-    var u2 = u * u;
-    var v2 = v * v;
-    var w2 = w * w;
-    num cosT = math.cos(theta);
-    var oneMinusCosT = 1 - cosT;
-    num sinT = math.sin(theta);
+    final u2 = u * u;
+    final v2 = v * v;
+    final w2 = w * w;
+    final cosT = math.cos(theta);
+    final oneMinusCosT = 1 - cosT;
+    final sinT = math.sin(theta);
 
     // Use the formula in the paper.
     final p = Vector3(0.0, 0.0, 0.0);
@@ -183,25 +191,12 @@ class RotationMatrix {
   ///
   /// Returns length = math.sqrt(u^2 + v^2 + w^2) if it is greater than
   /// [TOLERANCE], or -1 if not.
-  static num _longEnough(num u, num v, num w) {
-    num l = math.sqrt(u * u + v * v + w * w);
+  static double _longEnough(double u, double v, double w) {
+    final l = math.sqrt(u * u + v * v + w * w);
     if (l > TOLERANCE) {
       return l;
     } else {
       return -1;
     }
-  }
-
-  /// Get the resulting matrix.
-  ///
-  /// Returns The matrix as [Matrix4].
-  Matrix4 getMatrix() {
-    matrix ??= Matrix4.columns(
-      Vector4(_m11, _m21, _m31, 0),
-      Vector4(_m12, _m22, _m32, 0),
-      Vector4(_m13, _m23, _m33, 0),
-      Vector4(_m14, _m24, _m34, 1),
-    );
-    return matrix;
   }
 }
