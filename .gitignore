@@ -76,3 +76,5 @@ build/
 .vscode/settings.json
 fvm
 .fvm/
+example/.vscode/settings.json
+example/ios/Flutter/.last_build_id
