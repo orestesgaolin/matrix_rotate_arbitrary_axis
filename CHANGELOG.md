@@ -1,3 +1,7 @@
+## [1.1.0] - Null-safety [April 2021]
+
+* **Migrate to null-safety**
+
 ## [1.1.0-nullsafety.1] - Null-safety [October 2020]
 
 * **Enable null-safety**
